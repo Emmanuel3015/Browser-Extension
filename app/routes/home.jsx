@@ -23,7 +23,7 @@ function Extension() {
     <div className="flex justify-between mt-8">
       <h1 className="text-3xl font-bold">Extension List</h1>
       <div className="space-x-2">
-        <Button name="All" />
+        <Button name="All" isSelected={true} />
         <Button name="Active" />
         <Button name="Inactive" />
       </div>
@@ -171,10 +171,14 @@ function Items() {
     },
   ];
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-6">
-      {cards.map(({ id, image, head, paragraph }) => (
-        <Card key={id} image={image} head={head} paragraph={paragraph} />
-      ))}
+    <div className=" mt-6">
+      <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+        {cards.map(({ id, image, head, paragraph }) => (
+          <li key={id}>
+            <Card image={image} head={head} paragraph={paragraph} />
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
@@ -196,9 +200,15 @@ function Card({ head, paragraph, image }) {
   );
 }
 
-function Button({ name }) {
+function Button({ name, isSelected }) {
   return (
-    <button type="button" className="border-2 rounded-full px-4 py-2 mb-4">
+    <button
+      type="button"
+      className={`rounded-3xl px-4 py-2 mb-4 ${
+        isSelected ? "bg-red-500" : "bg-[#2f354c] hover:bg-red-500"
+      }
+      transition ease-in-out duration-300 active:scale-[.97]`}
+    >
       {name}
     </button>
   );
